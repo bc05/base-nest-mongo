@@ -1,45 +1,40 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-} from '@nestjs/common';
+import { Controller, Get, Body } from '@nestjs/common';
 import { VoluntariosService } from './voluntarios.service';
 import { CreateVoluntarioDto } from './dto/create-voluntario.dto';
-import { UpdateVoluntarioDto } from './dto/update-voluntario.dto';
 
-@Controller('voluntarios')
+@Controller({
+  path: 'voluntarios',
+  version: '1',
+})
 export class VoluntariosController {
   constructor(private readonly voluntariosService: VoluntariosService) {}
 
-  @Post()
-  create(@Body() createVoluntarioDto: CreateVoluntarioDto) {
-    return this.voluntariosService.create(createVoluntarioDto);
-  }
-
   @Get()
-  findAll() {
-    return this.voluntariosService.findAll();
+  create(@Body() createVoluntarioDto: CreateVoluntarioDto) {
+    return { resposta: 'olá mundo' };
+    //return this.voluntariosService.create(createVoluntarioDto);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.voluntariosService.findOne(+id);
-  }
+  // @Get()
+  // findAll() {
+  //   return this.voluntariosService.findAll();
+  // }
 
-  @Patch(':id')
-  update(
-    @Param('id') id: string,
-    @Body() updateVoluntarioDto: UpdateVoluntarioDto,
-  ) {
-    return this.voluntariosService.update(+id, updateVoluntarioDto);
-  }
+  // @Get(':id')
+  // findOne(@Param('id') id: string) {
+  //   return this.voluntariosService.findOne(+id);
+  // }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.voluntariosService.remove(+id);
-  }
+  // @Patch(':id')
+  // update(
+  //   @Param('id') id: string,
+  //   @Body() updateVoluntarioDto: UpdateVoluntarioDto,
+  // ) {
+  //   return this.voluntariosService.update(+id, updateVoluntarioDto);
+  // }
+
+  // @Delete(':id')
+  // remove(@Param('id') id: string) {
+  //   return this.voluntariosService.remove(+id);
+  // }
 }
