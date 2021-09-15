@@ -1,4 +1,6 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Post } from '@nestjs/common';
+import { ApenasMensagemRespostaDto } from 'src/comuns/dtos/resposta.dto';
+import { MensagemPadrao } from 'src/comuns/mensagens/mensagem-padrao';
 import { CreateVoluntarioDto } from './dto/create-voluntario.dto';
 import { VoluntariosService } from './voluntarios.service';
 
@@ -10,8 +12,11 @@ export class VoluntariosController {
   constructor(private readonly voluntariosService: VoluntariosService) {}
 
   @Post()
-  create(@Body() createVoluntarioDto: CreateVoluntarioDto) {
-    return this.voluntariosService.create(createVoluntarioDto);
+  async create(
+    @Body() createVoluntarioDto: CreateVoluntarioDto,
+  ): Promise<ApenasMensagemRespostaDto> {
+    await this.voluntariosService.create(createVoluntarioDto);
+    return { mensagem: MensagemPadrao.CRIADO_SUCESSO };
   }
 
   // @Get()
