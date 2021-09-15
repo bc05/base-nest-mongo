@@ -1,6 +1,6 @@
-import { Controller, Get, Body } from '@nestjs/common';
-import { VoluntariosService } from './voluntarios.service';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { CreateVoluntarioDto } from './dto/create-voluntario.dto';
+import { VoluntariosService } from './voluntarios.service';
 
 @Controller({
   path: 'voluntarios',
@@ -9,10 +9,9 @@ import { CreateVoluntarioDto } from './dto/create-voluntario.dto';
 export class VoluntariosController {
   constructor(private readonly voluntariosService: VoluntariosService) {}
 
-  @Get()
+  @Post()
   create(@Body() createVoluntarioDto: CreateVoluntarioDto) {
-    return { resposta: 'olá mundo' };
-    //return this.voluntariosService.create(createVoluntarioDto);
+    return this.voluntariosService.create(createVoluntarioDto);
   }
 
   // @Get()

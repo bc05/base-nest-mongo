@@ -13,11 +13,13 @@ export class VoluntariosService {
     private voluntarioModel: Model<VoluntarioDocument>,
   ) {}
 
+  async findAll() {
+    return this.voluntarioModel.find({});
+  }
+
   async create(
     createVoluntarioDto: CreateVoluntarioDto,
   ): Promise<VoluntarioDocument> {
-    const voluntario = await this.voluntarioModel.create(createVoluntarioDto);
-
-    return voluntario;
+    return this.voluntarioModel.create(createVoluntarioDto);
   }
 }
